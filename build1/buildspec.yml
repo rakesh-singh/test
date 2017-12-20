@@ -4,7 +4,7 @@ phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
-      - echo here is the AWS verion `aws --version`
+      - echo here is the AWS verion $(aws --version)
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION)
   build:
     commands:
