@@ -21,7 +21,6 @@ phases:
     commands:
       - echo Build started on `date`
       - echo $CODEBUILD_SRC_DIR
-      - cd $CODEBUILD_SRC_DIR/build1
       - ls
       - echo Building the Docker image...          
       - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
