@@ -3,6 +3,7 @@ version: 0.2
 env:
   variables:
     REPOSITORY_URI: "403191521364.dkr.ecr.us-east-1.amazonaws.com/doc"
+    IMAGE_TAG: "latest"
   parameter-store:
     GITHUB_SSH_PRIVATE_KEY: "GITHUB_SSH_PRIVATE_KEY"
 
