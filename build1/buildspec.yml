@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    REPOSITORY_URI: "403191521364.dkr.ecr.us-east-1.amazonaws.com/ecsla-myecr-1oy69dmkcw9q9"
+    REPOSITORY_URI: "403191521364.dkr.ecr.us-east-1.amazonaws.com/rakesh/api"
   parameter-store:
     GITHUB_SSH_PRIVATE_KEY: "GITHUB_SSH_PRIVATE_KEY"
 
@@ -10,6 +10,7 @@ phases:
   pre_build:
     commands:
       - echo $AWS_DEFAULT_REGION
+      - echo $CODEBUILD_RESOLVED_SOURCE_VERSION
       - echo Logging in to Amazon ECR...
       - $(aws --version)
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
@@ -20,7 +21,7 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...          
-      - docker build -t $REPOSITORY_URI:latest --build-arg GITHUB_SSH_PRIVATE_KEY=$GITHUB_SSH_PRIVATE_KEY .
+      - docker build -t $REPOSITORY_URI:latest --build-arg GITHUB_SSH_PRIVATE_KEY=$GITHUB_SSH_PRIVATE_KEY
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
   post_build:
     commands:
