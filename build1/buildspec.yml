@@ -3,7 +3,6 @@ version: 0.2
 env:
   variables:
     REPOSITORY_URI: "403191521364.dkr.ecr.us-east-1.amazonaws.com/doc"
-    IMAGE_TAG: "latest"
   parameter-store:
     GITHUB_SSH_PRIVATE_KEY: "GITHUB_SSH_PRIVATE_KEY"
 
@@ -15,6 +14,7 @@ phases:
       - echo Logging in to Amazon ECR...
       - $(aws --version)
       - $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
+      - IMAGE_TAG=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - echo $IMAGE_TAG
       - echo $REPOSITORY_URI
   build:
