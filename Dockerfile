@@ -1,4 +1,4 @@
-FROM amazonlinux:latest as intermediate
+FROM amazonlinux:latest
 
 RUN curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.rpm.sh | bash
 RUN (yum install git git-lfs ssh -y) && git lfs install
@@ -6,6 +6,7 @@ RUN (yum install git git-lfs ssh -y) && git lfs install
 ARG GITHUB_SSH_PRIVATE_KEY
 RUN mkdir /root/.ssh/
 RUN echo "${GITHUB_SSH_PRIVATE_KEY}" >  /root/.ssh/id_rsa
+RUN echo "${GITHUB_SSH_PRIVATE_KEY}"
 RUN chmod 600 /root/.ssh/id_rsa
 RUN touch /root/.ssh/known_hosts
 RUN ssh-keyscan imaginelearning.com >> /root/.ssh/known_hosts
