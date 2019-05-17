@@ -1,0 +1,3 @@
+[submodule "awstest"]
+	path = awstest
+	url = https://github.com/rakesh-singh/awstest.git
